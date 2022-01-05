@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QLine
 from PyQt5.QtWidgets import QApplication, QLabel, QLineEdit, QFileDialog, QPushButton, QVBoxLayout, QWidget, QGridLayout
-
+import downloader
+import subprocess
 class GUI():
 
     def __init__(self) -> None:
@@ -40,10 +41,13 @@ class GUI():
         self.app.exec()
 
     def openfile(self):        
-        file , check = QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()","", "All Files (*);;Python Files (*.py);;Text Files (*.txt)")
+        file = str(QFileDialog.getExistingDirectory(None,"Select Directory")) 
 
         self.fileinput.setText(file)
 
 
     def download(self):
-        print("test")
+        url = self.urlinput.text()
+        path = self.fileinput.text()
+        output = subprocess.run(["python", "-m", "gallery_dl", "-d", path, url])
+        print(output.returncode)
