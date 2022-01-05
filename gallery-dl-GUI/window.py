@@ -49,5 +49,13 @@ class GUI():
     def download(self):
         url = self.urlinput.text()
         path = self.fileinput.text()
-        output = subprocess.run(["python", "-m", "gallery_dl", "-d", path, url])
-        print(output.returncode)
+        options = [
+            "python",
+            "-m",
+            "gallery_dl",
+            "-d",
+            path,
+            url,
+        ]
+        output = subprocess.run(options)
+        
